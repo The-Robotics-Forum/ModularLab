@@ -19,7 +19,7 @@ class Cytron
 
 			for(lastpWm=lastpWm;lastpWm<pWm,lastpWm+=step){		//increase the speed step by step
 				
-				analogWrite(pWmpin,constraint(lastpWm,0,pWm);
+				analogWrite(pWmpin,constraint(lastpWm,0,pWm));
 				delay(interval);		
 			}
 			
@@ -29,7 +29,7 @@ class Cytron
 
 			for(lastpWm=lastpWm;lastpWm>pWm,lastpWm-=step){		//decrease the speed step by step
 				
-				analogWrite(pWmpin,constraint(lastpWm,pWm,255);
+				analogWrite(pWmpin,constraint(lastpWm,pWm,255));
 				delay(interval);		
 			}
 		}
