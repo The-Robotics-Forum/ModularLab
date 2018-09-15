@@ -11,3 +11,6 @@ Cytron.h Example
 >**motor1.step=5;**  //specify the step width for acceleration and decelaration
 
 >**motor1.interval=10;**    //specify delay between two steps
+
+
+Note: You must include the io.h developed for m16/m328/m2560
