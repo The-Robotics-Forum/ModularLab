@@ -2,15 +2,12 @@
 
 #include <avr/io.h>
 #include <utildelay.h>
-int y,g,SPEd,prt;
-
-#include "io.h"
-class mdrive
+class l2n8
 { public:
-	void l298nmotorDrive(int z ,int y ,int g,int h)
+	void init(int z ,int h)
 	{
-		DDRB=(1<<h)|(1<<(h-1))|(1<<(h-2))|(1<<(h-3));
-		analogWrite(y,g);
+		DDRB=(1<<h)|(1<<(h-1));
+
 		if(z==0)
 		{
 		PORTB=(1<<h)|(1<<(h-2));
@@ -19,6 +16,8 @@ class mdrive
 		{
 			PORTB=(1<<(h-1))|(1<<(h-3));
 		}
-		y=SPEd;
-		g=prt;
+	}
+	void drive(int y ,int g)
+	{	analogWrite(y,g);
+	}
 	}
