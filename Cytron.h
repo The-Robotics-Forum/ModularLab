@@ -26,8 +26,8 @@ class Cytron
 		
 		if(pWm>lastpWm){		//accelerate
 
-			for(lastpWm=lastpWm;lastpWm<pWm,lastpWm+=step){		//increase the speed step by step
-				
+			for(lastpWm=lastpWm;lastpWm<pWm,){		//increase the speed step by step
+				lastpWm+=step;
 				analogWrite(pWmpin,constraint(lastpWm,0,pWm));
 				delay(interval);		
 			}
@@ -36,8 +36,8 @@ class Cytron
 
 		else if(pWm<lastpWm){				//decelerate
 
-			for(lastpWm=lastpWm;lastpWm>pWm,lastpWm-=step){		//decrease the speed step by step
-				
+			for(lastpWm=lastpWm;lastpWm>pWm;){		//decrease the speed step by step
+				lastpWm-=step;
 				analogWrite(pWmpin,constraint(lastpWm,pWm,255));
 				delay(interval);		
 			}
@@ -71,7 +71,7 @@ void drive(uint8_t pWm,uint8_t pWm1){
         lastpWm-=step;
         lastpWm1-=step;
         analogWrite(pWmpin,constrain(lastpWm,pWm,255));
-         analogWrite(pWmpin1,constrain(lastpWm,pWm,255));
+         analogWrite(pWmpin1,constrain(lastpWm1,pWm1,255));
         delay(interval);    
     
       }
@@ -82,6 +82,7 @@ void drive(uint8_t pWm,uint8_t pWm1){
 
     else{   //no change
       analogWrite(pWmpin,pWm);
+	    analogWrite(pWmpin1,pWm1);
     }
     
   }
