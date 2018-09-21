@@ -53,7 +53,7 @@ void drive(uint8_t pWm,uint8_t pWm1){
     
     if(pWm>lastpWm){    //accelerate
 
-      for(lastpWm=lastpWm,lastpWm1=lastpWm1;lastpWm<pWm,lastpWm1<pWm1;){   //increase the sp,eed step by step
+      for(lastpWm=lastpWm,lastpWm1=lastpWm1;lastpWm<pWm||lastpWm1<pWm1;){   //increase the sp,eed step by step
         lastpWm+=step;
         lastpWm1+=step;
         analogWrite(pWmpin,constrain(lastpWm,-1,pWm));
@@ -67,7 +67,7 @@ void drive(uint8_t pWm,uint8_t pWm1){
 
     else if((pWm<lastpWm)&&(pWm1<lastpWm1)){       //decelerate
 
-      for(lastpWm=lastpWm,lastpWm1=lastpWm1;lastpWm<pWm,lastpWm1;){   //decrease the speed step by step
+      for(lastpWm=lastpWm,lastpWm1=lastpWm1;lastpWm<pWm||lastpWm1<pWm1;){   //decrease the speed step by step
         lastpWm-=step;
         lastpWm1-=step;
         analogWrite(pWmpin,constrain(lastpWm,pWm,255));
