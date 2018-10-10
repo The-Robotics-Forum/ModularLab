@@ -48,8 +48,8 @@ class Cytron
 		}
 		
 	}
-}
-void drive(uint8_t pWm,uint8_t pWm1){
+
+	void drive(uint8_t pWm,uint8_t pWm1){
     
     if(pWm>lastpWm){    //accelerate
 
