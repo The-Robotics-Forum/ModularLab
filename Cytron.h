@@ -174,4 +174,56 @@ class Cytron
 			analogWrite(pWmpin1,pWm2);
 		}	
 	}	
+		void stop(short int s)
+	{ switch(s)
+		{case 1:
+			analogWrite(pWmpin,0);
+		    break;
+	     case 2:
+		 analogWrite(pWmpin1,0);
+		    break;
+		case 3:
+		analogWrite(pWmpin2,0);
+		    break;	
+	}
+	}
+	void stop(short int s,short int a)
+	{ switch(s)
+{    case 1:
+			analogWrite(pWmpin,0);
+                   switch(a)
+			   {case 2:
+			    analogWrite(pWmpin1,0);
+		       break;
+		     case 3:
+	         	analogWrite(pWmpin2,0);
+		       break;	
+			    }		   
+	              break;
+	case 2:
+			 analogWrite(pWmpin1,0);
+			  switch(a)
+			   {case 1:
+			    analogWrite(pWmpin,0);
+		       break;
+		     case 3:
+	         	analogWrite(pWmpin2,0);
+		       break;	
+			    }		   
+	              break;
+	case 3:
+	           analogWrite(pWmpin2,0);
+			     switch(a)
+			   {case 1:
+			    analogWrite(pWmpin,0);
+		       break;
+		     case 2:
+	         	analogWrite(pWmpin1,0);
+		       break;	
+			    }		   
+	            	
+		
+		
+		 }
+	}	
 };
