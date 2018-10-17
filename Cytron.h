@@ -1,3 +1,4 @@
+//TODO: Add a stop() function
 class Cytron
 { 
 	public:
