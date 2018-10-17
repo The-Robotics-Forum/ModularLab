@@ -2,9 +2,9 @@
 class Cytron
 { 
 	public:
-	uint8_t dIrpin, pWmpin, lastpWm=0, step=5, interval=10;	//variables for first motor
-	uint8_t dIrpin1, pWmpin1, lastpWm1=0, step1=5, interval1=10; //variables for second motor
-	uint8_t dIrpin2, pWmpin2, lastpWm2=0, step2=5, interval2=10; //variables for third motor
+	uint8_t dIrpin, pWmpin, lastpWm=0, step1=5, interval=10;	//variables for first motor
+	uint8_t dIrpin1, pWmpin1, lastpWm1=0, step2=5; //variables for second motor
+	uint8_t dIrpin2, pWmpin2, lastpWm2=0, step3=5; //variables for third motor
 
 	Cytron(uint8_t getdIrpin, uint8_t getpWmpin){			//constructor function takes direction and pwm pins for cytron
 		dIrpin=getdIrpin;
@@ -50,7 +50,7 @@ class Cytron
 		if(pWm>lastpWm){		//accelerate
 
 			for(lastpWm=lastpWm;lastpWm<pWm;){		//increase the speed step by step
-				lastpWm+=step;
+				lastpWm+=step1;
 				analogWrite(pWmpin,constraint(lastpWm,0,pWm));
 				delay(interval);		
 			}
@@ -60,7 +60,7 @@ class Cytron
 		else if(pWm<lastpWm){				//decelerate
 
 			for(lastpWm=lastpWm;lastpWm>pWm;){		//decrease the speed step by step
-				lastpWm-=step;
+				lastpWm-=step1;
 				analogWrite(pWmpin,constraint(lastpWm,pWm,255));
 				delay(interval);		
 			}
@@ -78,11 +78,11 @@ class Cytron
 
 			for(lastpWm=lastpWm,lastpWm1=lastpWm1;lastpWm<pWm||lastpWm1<pWm1;){		//increase the speed step by step
 				if (pWm>lastpWm){
-					lastpWm+=step;
+					lastpWm+=step1;
 					analogWrite(pWmpin,constraint(lastpWm,0,pWm));
 				}
 				if (pWm1>lastpWm1){
-					lastpWm1+=step1;
+					lastpWm1+=step2;
 					analogWrite(pWmpin1,constraint(lastpWm1,0,pWm1));
 				}	
 				delay(interval);		
@@ -94,11 +94,11 @@ class Cytron
 
 			for(lastpWm=lastpWm,lastpWm1=lastpWm1;lastpWm>pWm||lastpWm1>pWm1;){		//decrease the speed step by step
 				if (pWm<lastpWm){
-					lastpWm-=step;
+					lastpWm-=step1;
 					analogWrite(pWmpin,constraint(lastpWm,pWm,255));
 				}
 				if (pWm1<lastpWm1){
-					lastpWm1-=step1;
+					lastpWm1-=step2;
 					analogWrite(pWmpin1,constraint(lastpWm1,pWm1,255));
 				}
 				delay(interval);		
@@ -118,15 +118,15 @@ class Cytron
 
 			for(lastpWm=lastpWm,lastpWm1=lastpWm1,lastpWm2=lastpWm2;lastpWm<pWm||lastpWm1<pWm1||lastpWm2<pWm2;){		//increase the speed step by step
 				if (pWm>lastpWm){
-					lastpWm+=step;
+					lastpWm+=step1;
 					analogWrite(pWmpin,constraint(lastpWm,0,pWm));
 				}
 				if (pWm1>lastpWm1){
-					lastpWm1+=step1;
+					lastpWm1+=step2;
 					analogWrite(pWmpin1,constraint(lastpWm1,0,pWm1));
 				}
 				if (pWm2>lastpWm2){
-					lastpWm2+=step2;
+					lastpWm2+=step3;
 					analogWrite(pWmpin2,constraint(lastpWm2,0,pWm2));
 				}	
 				delay(interval);		
@@ -138,15 +138,15 @@ class Cytron
 
 			for(lastpWm=lastpWm,lastpWm1=lastpWm1;lastpWm>pWm||lastpWm1>pWm1;){		//decrease the speed step by step
 				if (pWm<lastpWm){
-					lastpWm-=step;
+					lastpWm-=step1;
 					analogWrite(pWmpin,constraint(lastpWm,pWm,255));
 				}
 				if (pWm1<lastpWm1){
-					lastpWm1-=step1;
+					lastpWm1-=step2;
 					analogWrite(pWmpin1,constraint(lastpWm1,pWm1,255));
 				}
 				if (pWm2<lastpWm2){
-					lastpWm2-=step2;
+					lastpWm2-=step3;
 					analogWrite(pWmpin2,constraint(lastpWm2,pWm2,255));
 				}
 				delay(interval);		
