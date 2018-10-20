@@ -47,6 +47,7 @@ class Cytron
   }
   	void direction(uint8_t dIrection){
 		digitalWrite(dIrpin,dIrection);
+		Serial.write(2);
 	}
 	
 	void direction(uint8_t dIrection, uint8_t dIrection1){
@@ -63,11 +64,11 @@ class Cytron
 	void drive(uint8_t pWm){
 		
 		if(pWm>lAstpwm){		//accelerate
-
 			for(lAstpwm=lAstpwm;lAstpwm<pWm;){		//increase the speed step by step
 				lAstpwm+=step1;
 				analogWrite(pWmpin,constrain(lAstpwm,0,pWm));
-				delay(interval);		
+				delay(interval);
+				Serial.write(constrain(lAstpwm,0,pWm));		
 			}
 			
 		}
