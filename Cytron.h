@@ -26,6 +26,7 @@ class Cytron
 		step1=5;
 		step2=5;
 		interval=10;
+		Serial.write(1);
   }
   	Cytron(uint8_t getdIrpin, uint8_t getpWmpin, uint8_t getdIrpin1, uint8_t getpWmpin1, uint8_t getdIrpin2, uint8_t getpWmpin2){     //constructor function takes direction and pwm pins for cytron
 	    pWmpin=getpWmpin;
@@ -47,12 +48,12 @@ class Cytron
   }
   	void direction(uint8_t dIrection){
 		digitalWrite(dIrpin,dIrection);
-		Serial.write(2);
 	}
 	
 	void direction(uint8_t dIrection, uint8_t dIrection1){
 		digitalWrite(dIrpin,dIrection);
 		digitalWrite(dIrpin1,dIrection1);
+		Serial.write(2);
 	}
 
 	void direction(uint8_t dIrection, uint8_t dIrection1, uint8_t dIrection2){
@@ -64,11 +65,11 @@ class Cytron
 	void drive(uint8_t pWm){
 		
 		if(pWm>lAstpwm){		//accelerate
+
 			for(lAstpwm=lAstpwm;lAstpwm<pWm;){		//increase the speed step by step
 				lAstpwm+=step1;
 				analogWrite(pWmpin,constrain(lAstpwm,0,pWm));
-				delay(interval);
-				Serial.write(constrain(lAstpwm,0,pWm));		
+				delay(interval);		
 			}
 			
 		}
@@ -125,6 +126,7 @@ class Cytron
 			analogWrite(pWmpin,pWm);
 			analogWrite(pWmpin1,pWm1);
 		}	
+		Serial.write(3);
 	}
 
 	//THREE MOTORS
