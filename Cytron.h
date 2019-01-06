@@ -160,141 +160,42 @@ class Cytron
 	}
 
 	//THREE MOTORS
-	void drive(uint8_t pWm, uint8_t pWm1, uint8_t pWm2){
-
-		if(pWm>lAstpwm&&pWm1>lAstpwm1&&pWm2>lAstpwm2){		//accelerate
-
-			for(lAstpwm=lAstpwm,lAstpwm1=lAstpwm1,lAstpwm2=lAstpwm2;lAstpwm<pWm&&lAstpwm1<pWm1&&lAstpwm2<pWm2;){		//increase the speed step by step
-				if (pWm>lAstpwm){
-					lAstpwm+=step1;
-					analogWrite(pWmpin,constrain(lAstpwm,0,pWm));
-				}
-				if (pWm1>lAstpwm1){
-					lAstpwm1+=step2;
-					analogWrite(pWmpin1,constrain(lAstpwm1,0,pWm1));
-				}
-				if (pWm2>lAstpwm2){
-					lAstpwm2+=step3;
-					analogWrite(pWmpin2,constrain(lAstpwm2,0,pWm2));
-				}
-				delay(interval);
+	void drive(uint8_t pWm, uint8_t pWm1, uint8_t pWm2)
+	{
+		while(pWm==lAstpwm&&pWm1==lAstpwm1&&pWm2=lAstpwm2)
+		{
+			
+			if(pWm>lAstpwm)
+			{lAstpwm+=step1;
+	constrain(lAstpwm,0,pWm);
 			}
-
-		}
-
-		else if(pWm<lAstpwm&&pWm1<lAstpwm1&&pWm2<lAstpwm2){				//decelerate
-
-			for(lAstpwm=lAstpwm,lAstpwm1=lAstpwm1,lAstpwm2=lAstpwm2;lAstpwm>pWm&&lAstpwm1>pWm1&&lAstpwm2>pWm2;){		//decrease the speed step by step
-
-
-				if (pWm<lAstpwm){
-					lAstpwm-=step1;
-					analogWrite(pWmpin,constrain(lAstpwm,pWm,255));
-					Serial.print('O');
-				}
-				if (pWm1<lAstpwm1){
-					lAstpwm1-=step2;
-					analogWrite(pWmpin1,constrain(lAstpwm1,pWm1,255));
-				}
-				if (pWm2<lAstpwm2){
-					lAstpwm2-=step3;
-					analogWrite(pWmpin2,constrain(lAstpwm2,pWm2,255));
-				}
-				delay(interval);
+			else if(pWm<lAstpwm)
+	         {lAstpwm-=step1;
+			constrain(lAstpwm,pWm,255);
 			}
-		}
-		else if(pWm>lAstpwm&&pWm1<lAstpwm1&&pWm2<lAstpwm2){				//decelerate
-
-			for(lAstpwm=lAstpwm,lAstpwm1=lAstpwm1,lAstpwm2=lAstpwm2;lAstpwm>pWm&&lAstpwm1>pWm1&&lAstpwm2>pWm2;){		//decrease the speed step by step
-
-
-				if (pWm>lAstpwm){
-					lAstpwm+=step1;
-					analogWrite(pWmpin,constrain(lAstpwm,pWm,255));
-					Serial.print('O');
-				}
-				if (pWm1<lAstpwm1){
-					lAstpwm1-=step2;
-					analogWrite(pWmpin1,constrain(lAstpwm1,pWm1,255));
-				}
-				if (pWm2<lAstpwm2){
-					lAstpwm2-=step3;
-					analogWrite(pWmpin2,constrain(lAstpwm2,pWm2,255));
-				}
+				if(pWm1>lAstpwm1)
+				{lAstpwm1+=step2;
+	constrain(lAstpwm,0,pWm);
+					}
+					else if(pWm1<lAstpwm1)
+					{lAstpwm1-=step2;
+			constrain(lAstpwm,pWm,255);
+						}
+						if(pWm2>lAstpwm2)
+				{lAstpwm2+=step3;
+	constrain(lAstpwm,0,pWm);
+					}
+					else if(pWm2<lAstpwm1)
+					{lAstpwm2-=step3;
+			constrain(lAstpwm,pWm,255);
+						}				 
+		analogWrite(pWmpin,lastpWm);
+		analogWrite(pWmpin1,lastpWm1);
+		analogWrite(pWmpin2,lastpWm2);
 				delay(interval);
-			}
 		}
-		else if(pWm>lAstpwm&&pWm1>lAstpwm1&&pWm2<lAstpwm2){				//decelerate
+		}		
 
-			for(lAstpwm=lAstpwm,lAstpwm1=lAstpwm1,lAstpwm2=lAstpwm2;lAstpwm>pWm&&lAstpwm1>pWm1&&lAstpwm2>pWm2;){		//decrease the speed step by step
-
-
-				if (pWm>lAstpwm){
-					lAstpwm+=step1;
-					analogWrite(pWmpin,constrain(lAstpwm,pWm,255));
-					Serial.print('O');
-				}
-				if (pWm1>lAstpwm1){
-					lAstpwm1+=step2;
-					analogWrite(pWmpin1,constrain(lAstpwm1,pWm1,255));
-				}
-				if (pWm2<lAstpwm2){
-					lAstpwm2-=step3;
-					analogWrite(pWmpin2,constrain(lAstpwm2,pWm2,255));
-				}
-				delay(interval);
-			}
-		}
-		else if(pWm<lAstpwm&&pWm1>lAstpwm1&&pWm2<lAstpwm2){				//decelerate
-
-			for(lAstpwm=lAstpwm,lAstpwm1=lAstpwm1,lAstpwm2=lAstpwm2;lAstpwm>pWm&&lAstpwm1>pWm1&&lAstpwm2>pWm2;){		//decrease the speed step by step
-
-
-				if (pWm<lAstpwm){
-					lAstpwm-=step1;
-					analogWrite(pWmpin,constrain(lAstpwm,pWm,255));
-					Serial.print('O');
-				}
-				if (pWm1>lAstpwm1){
-					lAstpwm1+=step2;
-					analogWrite(pWmpin1,constrain(lAstpwm1,pWm1,255));
-				}
-				if (pWm2<lAstpwm2){
-					lAstpwm2-=step3;
-					analogWrite(pWmpin2,constrain(lAstpwm2,pWm2,255));
-				}
-				delay(interval);
-			}
-		}
-		else if(pWm<lAstpwm&&pWm1<lAstpwm1&&pWm2>lAstpwm2){				//decelerate
-
-			for(lAstpwm=lAstpwm,lAstpwm1=lAstpwm1,lAstpwm2=lAstpwm2;lAstpwm>pWm&&lAstpwm1>pWm1&&lAstpwm2>pWm2;){		//decrease the speed step by step
-
-
-				if (pWm<lAstpwm){
-					lAstpwm-=step1;
-					analogWrite(pWmpin,constrain(lAstpwm,pWm,255));
-					Serial.print('O');
-				}
-				if (pWm1>lAstpwm1){
-					lAstpwm1-=step2;
-					analogWrite(pWmpin1,constrain(lAstpwm1,pWm1,255));
-				}
-				if (pWm2>lAstpwm2){
-					lAstpwm2+=step3;
-					analogWrite(pWmpin2,constrain(lAstpwm2,pWm2,255));
-				}
-				delay(interval);
-			}
-		}
-
-
-		else{	//	no change
-			analogWrite(pWmpin,pWm);
-			analogWrite(pWmpin1,pWm1);
-			analogWrite(pWmpin2,pWm2);
-		}
-	}
 
 	//FOUR MOTORS
 	void drive(uint8_t pWm, uint8_t pWm1, uint8_t pWm2, uint8_t pWm3){
